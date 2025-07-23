@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Tree Visualizer</h1>
+
+    <div class="controls">
+        <label for="treeTypeSelect">Choose Tree Type:</label>
+        <select id="treeTypeSelect">
+            <option value="bst" selected>Binary Search Tree</option>
+            <option value="avl">AVL Tree</option>
+            <option value="redblack">Red-Black Tree</option>
+            <option value="splay">Splay Tree</option>
+        </select>
+
+        <input type="number" id="nodeValue" placeholder="Enter value">
+        <button id="insertBtn">Insert Node</button>
+        <button id="deleteBtn">Delete Node</button>
+        <button id="searchBtn">Search Node</button>
+        <button id="clearBtn">Clear Tree</button>
+        <button id="clearLogBtn">Clear Log</button>
+    </div>
+
+    <div id="treeContainer">
+        </div>
+
+    <div id="explanationBox">
+        <h3>Explanation Log:</h3>
+        <p>Actions and their underlying mechanisms will appear here.</p>
+    </div>
+
+    <div id="messageBox"></div> 
+
+    <script src="script.js"></script>
+</body>
+</html>

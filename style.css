@@ -1,0 +1,339 @@
+/* style.css content - Enhanced UI/UX */
+body {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+    background: radial-gradient(circle at top left, #e0eafc, #f4f7f9); /* More dynamic radial gradient */
+    color: #34495e; /* Darker, professional text color */
+    min-height: 100vh;
+    transition: background 0.5s ease-in-out; /* Smooth transition for background changes */
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 35px;
+    font-size: 3em; /* Even larger, bolder title */
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* More pronounced text shadow */
+    letter-spacing: 1px; /* Slightly more spaced letters */
+}
+
+.controls {
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2); /* Deeper, more prominent shadow */
+    justify-content: center;
+    max-width: 90%;
+    transition: all 0.3s ease;
+}
+
+input[type="number"] {
+    padding: 14px 20px;
+    border: 1px solid #c0d3e6;
+    border-radius: 12px;
+    font-size: 18px;
+    width: 150px;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); /* Deeper inner shadow */
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 5px rgba(52, 152, 219, 0.4), inset 0 2px 5px rgba(0,0,0,0.1); /* Brighter, wider focus shadow */
+}
+
+select {
+    padding: 14px 20px;
+    border: 1px solid #c0d3e6;
+    border-radius: 12px;
+    font-size: 18px;
+    background-color: #f8fbfc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%2334495e%22%20d%3D%22M287%2C197.93l-131.7-131.7c-4.7-4.7-12.3-4.7-17%2C0L5.4%2C197.93c-4.7%2C4.7-4.7%2C12.3%2C0%2C17l11.3%2C11.3c4.7%2C4.7%2C12.3%2C4.7%2C17%2C0l103.1-103.1l103.1%2C103.1c4.7%2C4.7%2C12.3%2C4.7%2C17%2C0l11.3-11.3C291.7%2C210.23%2C291.7%2C202.63%2C287%2C197.93z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    padding-right: 40px;
+}
+
+select:hover {
+    border-color: #3498db;
+}
+
+select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 5px rgba(52, 152, 219, 0.4), inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+button {
+    padding: 14px 28px;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Deeper button shadow */
+    background-image: linear-gradient(to right, #3498db, #2980b9);
+}
+
+button:hover {
+    transform: translateY(-5px); /* More lift on hover */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+    background-image: linear-gradient(to right, #2980b9, #3498db);
+}
+
+button:active {
+    transform: translateY(-1px) scale(1.02); /* Subtle pop on active */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+#deleteBtn {
+    background-image: linear-gradient(to right, #e74c3c, #c0392b);
+}
+
+#deleteBtn:hover {
+    background-image: linear-gradient(to right, #c0392b, #e74c3c);
+}
+
+#searchBtn {
+    background-image: linear-gradient(to right, #f39c12, #e67e22);
+}
+
+#searchBtn:hover {
+    background-image: linear-gradient(to right, #e67e22, #f39c12);
+}
+
+#clearBtn, #clearLogBtn {
+    background-image: linear-gradient(to right, #95a5a6, #7f8c8d);
+}
+
+#clearBtn:hover, #clearLogBtn:hover {
+    background-image: linear-gradient(to right, #7f8c8d, #95a5a6);
+}
+
+
+#treeContainer {
+    border: 1px solid #d0e0ed;
+    min-height: 550px; /* Increased min-height for more space */
+    width: 95%;
+    max-width: 1500px; /* Increased max-width */
+    background-color: #ffffff;
+    position: relative;
+    overflow: auto;
+    padding-top: 80px; /* More space for the root node */
+    border-radius: 25px; /* Even more rounded corners */
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15); /* Deeper, softer shadow */
+    margin-bottom: 30px;
+    transition: all 0.5s ease-in-out;
+}
+
+/* Styles for individual tree nodes */
+.node {
+    position: absolute;
+    width: 60px; /* Larger nodes */
+    height: 60px;
+    background-color: #3498db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 18px; /* Larger font */
+    border: 4px solid #2980b9;
+    box-shadow: 4px 5px 20px rgba(0,0,0,0.35); /* More prominent shadow */
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), background-color 0.3s ease, border-color 0.3s ease, opacity 0.5s ease, transform 0.5s ease; /* Bouncier and smoother transitions */
+    z-index: 10;
+    cursor: pointer;
+    opacity: 0; /* Start hidden for spawn animation */
+    transform: scale(0); /* Start scaled down for spawn animation */
+}
+
+.node.spawned { /* Class added by JS after insertion */
+    opacity: 1;
+    transform: scale(1);
+}
+
+.node:hover {
+    transform: scale(1.15); /* More pronounced hover effect */
+    box-shadow: 5px 6px 25px rgba(0,0,0,0.45);
+}
+
+/* Highlight style for searched node */
+.node.highlight {
+    background-color: #2ecc71; /* Vibrant green highlight for search */
+    border-color: #27ae60;
+    transform: scale(1.25); /* Even more prominent highlight */
+    box-shadow: 0 0 30px rgba(46, 204, 113, 1);
+    animation: pulse 1.5s infinite alternate; /* Pulsing animation */
+}
+
+@keyframes pulse {
+    from {
+        box-shadow: 0 0 30px rgba(46, 204, 113, 1);
+    }
+    to {
+        box-shadow: 0 0 45px rgba(46, 204, 113, 1.2);
+    }
+}
+
+
+/* Red-Black Tree specific node colors */
+.node.red {
+    background-color: #e74c3c;
+    border-color: #c0392b;
+}
+
+.node.black {
+    background-color: #34495e;
+    color: #ecf0f1;
+    border-color: #2c3e50;
+}
+
+/* Temporary highlight for RB/Splay operations */
+.node.temp-highlight {
+    border: 6px solid #f39c12; /* Thicker, vibrant orange border for temporary highlights */
+    box-shadow: 0 0 25px rgba(243, 156, 18, 1);
+    transform: scale(1.18);
+}
+
+
+/* Styles for lines connecting nodes */
+.line {
+    position: absolute;
+    background-color: #95a5a6;
+    height: 5px; /* Even thicker lines for better visibility */
+    transform-origin: 0 0;
+    z-index: 5;
+    transition: all 0.6s ease-in-out; /* Smooth transition for lines */
+}
+
+/* Message Box Styling */
+#messageBox {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    padding: 20px 40px; /* More padding */
+    border-radius: 18px; /* More rounded */
+    font-weight: bold;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* Deeper shadow */
+    transition: opacity 0.7s ease-in-out, transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncier slide-in */
+    opacity: 0;
+    min-width: 280px;
+    text-align: center;
+    transform: translateY(-50px); /* Start further off-screen */
+}
+
+#messageBox.show {
+    opacity: 1;
+    transform: translateY(0); /* Slide in effect */
+}
+
+#messageBox.error {
+    background-color: #c0392b;
+}
+
+#messageBox.info {
+    background-color: #27ae60;
+}
+
+/* Explanation Log Styling */
+#explanationBox {
+    background-color: #fcfdfe;
+    border: 1px solid #d0e0ed;
+    border-radius: 18px; /* Consistent rounded corners */
+    padding: 35px; /* More padding */
+    margin-top: 35px;
+    width: 95%;
+    max-width: 1500px;
+    min-height: 220px; /* Increased min-height */
+    max-height: 450px; /* Increased max-height */
+    overflow-y: auto;
+    font-family: 'Segoe UI Mono', 'Consolas', monospace;
+    font-size: 17px; /* Slightly larger font */
+    color: #4a627a;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12); /* Softer, deeper shadow */
+    line-height: 1.8; /* Improved readability */
+    white-space: pre-wrap;
+}
+
+#explanationBox h3 {
+    color: #2c3e50;
+    margin-bottom: 18px;
+    font-size: 1.5em;
+    border-bottom: 2px solid #e0e0e0; /* Thicker border */
+    padding-bottom: 12px;
+}
+
+#explanationBox p {
+    margin: 0 0 12px 0; /* More margin between paragraphs */
+    padding: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+    }
+    .controls {
+        flex-direction: column;
+        gap: 15px;
+        width: 98%;
+        padding: 20px;
+    }
+    input[type="number"] {
+        width: 90%;
+        font-size: 16px;
+        padding: 12px 18px;
+    }
+    button, select {
+        width: 95%;
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+    #treeContainer {
+        min-height: 450px;
+        padding-top: 60px;
+    }
+    .node {
+        width: 55px;
+        height: 55px;
+        font-size: 16px;
+    }
+    .line {
+        height: 4px;
+    }
+    #explanationBox {
+        padding: 25px;
+        font-size: 15px;
+        min-height: 200px;
+        max-height: 350px;
+    }
+    #messageBox {
+        top: 30px;
+        right: 30px;
+        padding: 15px 30px;
+        min-width: 200px;
+    }
+}
+
