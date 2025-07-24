@@ -43,11 +43,10 @@ A dynamic and interactive web application designed to **visualize the operations
 #File Structure
 
 Visual_Tree_Traversal/
-├── index.html # Main HTML structure
-├── style.css # Visual styling and animations
-├── script.js # Tree logic and DOM manipulation
-└── README.md # Project overview and instructions
-
+├── index.html
+├── style.css 
+├── script.js 
+└── README.md 
 
 #Getting Started
 
