@@ -1,11 +1,8 @@
-// tree.js content
-
-// Define colors for Red-Black Tree
+//  colors for RB tree 
 const RED = 'red';
 const BLACK = 'black';
-const ANIMATION_DELAY = 500; // Milliseconds for visual steps
+let currentAnimationDelay = 500; 
 
-// 1. Define the Node Class (Base class for all binary trees)
 class Node {
     constructor(value) {
         this.value = value;
@@ -479,7 +476,7 @@ class RedBlackTree {
         logExplanation(`Left Rotation complete. New subtree root: ${y.value}.`);
         drawTree(this.root); // Redraw immediately after rotation
         // Remove highlight after a short delay
-        setTimeout(() => this.removeHighlights(), ANIMATION_DELAY);
+        setTimeout(() => this.removeHighlights(), currentAnimationDelay);
     }
 
     rightRotate(y) {
@@ -505,7 +502,7 @@ class RedBlackTree {
         logExplanation(`Right Rotation complete. New subtree root: ${x.value}.`);
         drawTree(this.root); // Redraw immediately after rotation
         // Remove highlight after a short delay
-        setTimeout(() => this.removeHighlights(), ANIMATION_DELAY);
+        setTimeout(() => this.removeHighlights(), currentAnimationDelay);
     }
 
     // Helper for temporary visual highlighting
@@ -529,11 +526,11 @@ class RedBlackTree {
     insert(value) {
         logExplanation(`--- Inserting ${value} into Red-Black Tree ---`);
         logExplanation(`RB Properties:`);
-        logExplanation(`1. Node is RED or BLACK.`);
-        logExplanation(`2. Root is BLACK.`);
-        logExplanation(`3. All leaves (NIL) are BLACK.`);
-        logExplanation(`4. If a node is RED, both children are BLACK (no two consecutive REDs).`);
-        logExplanation(`5. All simple paths from node to descendant leaves contain same number of BLACK nodes.`);
+        logExplanation(`&bull; Node is RED or BLACK.`);
+        logExplanation(`&bull; Root is BLACK.`);
+        logExplanation(`&bull; All leaves (NIL) are BLACK.`);
+        logExplanation(`&bull; If a node is RED, both children are BLACK (no two consecutive REDs).`);
+        logExplanation(`&bull; All simple paths from node to descendant leaves contain same number of BLACK nodes.`);
 
         const newNode = new RedBlackNode(value);
         newNode.left = this.NIL;
@@ -566,13 +563,13 @@ class RedBlackTree {
         this.nodeCount++;
         logExplanation(`Node ${value} inserted. Initial color: RED (Property 1).`);
         drawTree(this.root); // Draw the new node before fixup
-        setTimeout(() => this._insertFixup(newNode), ANIMATION_DELAY); // Delay fixup for visualization
+        setTimeout(() => this._insertFixup(newNode), currentAnimationDelay); // Delay fixup for visualization
         return true;
     }
 
     _insertFixup(z) {
         // Use a promise-like structure to sequence animations
-        const animateStep = (delay = ANIMATION_DELAY) => new Promise(resolve => setTimeout(resolve, delay));
+        const animateStep = (delay = currentAnimationDelay) => new Promise(resolve => setTimeout(resolve, delay));
 
         const fixupRecursive = async (zNode) => {
             while (zNode !== this.root && this.getColor(this.getParent(zNode)) === RED) {
@@ -722,7 +719,7 @@ class RedBlackTree {
         if (originalColorOfY === BLACK) {
             logExplanation(`Node ${value} deleted. Original color of removed node/successor was BLACK. Initiating fixup.`);
             logExplanation(`Reason: This might violate Property 5 (same number of black nodes on all paths).`);
-            setTimeout(() => this._deleteFixup(x), ANIMATION_DELAY); // Delay fixup for visualization
+            setTimeout(() => this._deleteFixup(x), currentAnimationDelay); // Delay fixup for visualization
         } else {
             logExplanation(`Node ${value} deleted. Original color of removed node/successor was RED. No fixup needed (Property 4 is maintained).`);
         }
@@ -754,7 +751,8 @@ class RedBlackTree {
 
     // Red-Black Tree Deletion Fixup (Simplified for this iteration due to complexity)
     // This is a placeholder for the full, complex RB delete fixup.
-    // A complete implementation involves 4 cases and multiple rotations/recolorings.
+    // A complete implementation would handle 4 cases and multiple rotations/recolorings.
+    // For now, if the root becomes RED, make it BLACK.
     _deleteFixup(x) {
         logExplanation(`Starting deletion fixup at node ${x.value === null ? 'NIL' : x.value}.`);
         // Placeholder for full RB deletion fixup logic.
@@ -848,8 +846,8 @@ class SplayTree {
         } else {
             this.root = node;
         }
-        drawTree(this.root);
-        setTimeout(() => this.removeHighlights(), ANIMATION_DELAY);
+        // Removed direct drawTree call here
+        // Removed direct setTimeout for removeHighlights here
     }
 
     // Helper to perform a zag rotation (left rotation)
@@ -874,8 +872,8 @@ class SplayTree {
         } else {
             this.root = node;
         }
-        drawTree(this.root);
-        setTimeout(() => this.removeHighlights(), ANIMATION_DELAY);
+        // Removed direct drawTree call here
+        // Removed direct setTimeout for removeHighlights here
     }
 
     // Splay operation: moves node to the root
@@ -884,8 +882,8 @@ class SplayTree {
 
         logExplanation(`\n--- Splaying node ${node.value} to the root ---`);
         this.highlightNodes([node], 'temp-highlight');
-        drawTree(this.root, node);
-        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+        drawTree(this.root, node); // Initial draw
+        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
 
         while (node.parent !== null) {
             const parent = node.parent;
@@ -894,59 +892,68 @@ class SplayTree {
             if (grandParent === null) { // Zig or Zag case (parent is root)
                 logExplanation(`Zig/Zag Case: Parent ${parent.value} is the root.`);
                 this.highlightNodes([node, parent], 'temp-highlight');
-                drawTree(this.root, node);
-                await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                drawTree(this.root, node); // Draw before rotation
+                await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
 
                 if (node === parent.left) { // Zig
                     this._zig(node);
                 } else { // Zag
                     this._zag(node);
                 }
-                await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY)); // Wait for rotation animation
+                drawTree(this.root, node); // Draw after rotation
+                await new Promise(resolve => setTimeout(resolve, currentAnimationDelay)); // Wait for rotation animation
             } else { // Zig-Zig or Zig-Zag case (grandparent exists)
                 if ((node === parent.left && parent === grandParent.left) || // Zig-Zig
                     (node === parent.right && parent === grandParent.right)) { // Zag-Zag
                     logExplanation(`Zig-Zig/Zag-Zag Case: Node ${node.value}, Parent ${parent.value}, Grandparent ${grandParent.value} are in a line.`);
                     logExplanation(`Performing rotation at Grandparent (${grandParent.value}) first, then at Parent (${parent.value}).`);
                     this.highlightNodes([node, parent, grandParent], 'temp-highlight');
-                    drawTree(this.root, node);
-                    await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                    drawTree(this.root, node); // Draw before first rotation
+                    await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
 
                     if (node === parent.left) { // Zig-Zig
                         this._zig(parent); // Rotate parent with grandparent
-                        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                        drawTree(this.root, node); // Draw after first rotation
+                        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
                         this._zig(node); // Rotate node with new parent
-                        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                        drawTree(this.root, node); // Draw after second rotation
+                        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
                     } else { // Zag-Zag
                         this._zag(parent); // Rotate parent with grandparent
-                        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                        drawTree(this.root, node); // Draw after first rotation
+                        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
                         this._zag(node); // Rotate node with new parent
-                        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                        drawTree(this.root, node); // Draw after second rotation
+                        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
                     }
                 } else { // Zig-Zag or Zag-Zig case
                     logExplanation(`Zig-Zag/Zag-Zig Case: Node ${node.value}, Parent ${parent.value}, Grandparent ${grandParent.value} are in a zig-zag pattern.`);
                     logExplanation(`Performing rotation at Parent (${parent.value}) first, then at Grandparent (${grandParent.value}).`);
                     this.highlightNodes([node, parent, grandParent], 'temp-highlight');
-                    drawTree(this.root, node);
-                    await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                    drawTree(this.root, node); // Draw before first rotation
+                    await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
 
                     if (node === parent.left) { // Zag-Zig
                         this._zig(node); // Rotate node with parent
-                        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                        drawTree(this.root, node); // Draw after first rotation
+                        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
                         this._zag(node); // Rotate node (now parent) with grandparent
-                        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                        drawTree(this.root, node); // Draw after second rotation
+                        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
                     } else { // Zig-Zag
                         this._zag(node); // Rotate node with parent
-                        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                        drawTree(this.root, node); // Draw after first rotation
+                        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
                         this._zig(node); // Rotate node (now parent) with grandparent
-                        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+                        drawTree(this.root, node); // Draw after second rotation
+                        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
                     }
                 }
             }
         }
         logExplanation(`Node ${node.value} has been splayed to the root.`);
         drawTree(this.root, node); // Final redraw with highlight on new root
-        setTimeout(() => this.removeHighlights(), ANIMATION_DELAY);
+        setTimeout(() => this.removeHighlights(), currentAnimationDelay);
     }
 
     // Helper for temporary visual highlighting
@@ -1002,7 +1009,7 @@ class SplayTree {
         }
         this.nodeCount++;
         drawTree(this.root); // Draw the new node
-        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
 
         logExplanation(`Now splaying the newly inserted node ${newNode.value} to the root.`);
         await this._splay(newNode);
@@ -1017,7 +1024,7 @@ class SplayTree {
             logExplanation(`Current node: ${currentNode.value}. Comparing ${value} with ${currentNode.value}.`);
             this.highlightNodes([currentNode], 'temp-highlight');
             drawTree(this.root, currentNode);
-            await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+            await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
             this.removeHighlights(); // Remove highlight after step
 
             if (value === currentNode.value) {
@@ -1068,7 +1075,7 @@ class SplayTree {
         logExplanation(`Node ${value} found and splayed to root. Now performing deletion.`);
         this.highlightNodes([nodeToDelete], 'temp-highlight');
         drawTree(this.root, nodeToDelete);
-        await new Promise(resolve => setTimeout(resolve, ANIMATION_DELAY));
+        await new Promise(resolve => setTimeout(resolve, currentAnimationDelay));
         this.removeHighlights();
 
         // NodeToDelete is now the root
@@ -1151,8 +1158,13 @@ const treeContainer = document.getElementById('treeContainer');
 const pageTitle = document.querySelector('h1');
 const explanationBox = document.getElementById('explanationBox');
 
+// New DOM elements for added features
+const animationSpeedSlider = document.getElementById('animationSpeed');
+const generateRandomBtn = document.getElementById('generateRandomBtn');
+const nodeTooltip = document.getElementById('nodeTooltip'); // Assuming this div exists in HTML
+
 // --- Configuration for Visualization ---
-const NODE_SIZE = 50; // For binary nodes (BST, AVL, Splay)
+const NODE_SIZE = 65; // For binary nodes (BST, AVL, Splay)
 const NODE_RADIUS = NODE_SIZE / 2;
 const HORIZONTAL_SPACING = 50;
 const VERTICAL_SPACING = 80;
@@ -1178,11 +1190,11 @@ function calculateNodePositions(node, level) {
 // --- Drawing Function ---
 function drawTree(root, highlightNode = null) {
     console.log("drawTree called. Root:", root ? root.value : "null");
-    treeContainer.innerHTML = '';
+    treeContainer.innerHTML = ''; // Clear existing nodes and lines
 
     if (!root || (currentTreeInstance instanceof RedBlackTree && root === currentTreeInstance.NIL)) {
         treeContainer.style.width = '95%';
-        treeContainer.style.height = '450px'; /* Adjusted for empty state */
+        treeContainer.style.height = '600px'; /* Adjusted for empty state */
         console.log("Tree is empty or NIL root. Container cleared.");
         return;
     }
@@ -1191,7 +1203,6 @@ function drawTree(root, highlightNode = null) {
 
     calculateNodePositions(root, 0);
 
-    let maxX = 0;
     const allNodes = currentTreeInstance.getAllNodes();
     console.log("Nodes to draw:", allNodes.length);
     allNodes.forEach(node => {
@@ -1201,11 +1212,14 @@ function drawTree(root, highlightNode = null) {
             nodeEl = document.createElement('div');
             nodeEl.classList.add('node');
             node.htmlElement = nodeEl;
+            // Add 'spawned' class immediately. CSS transition handles animation.
+            nodeEl.classList.add('spawned');
         }
         nodeEl.textContent = node.value;
         nodeEl.style.left = `${node.x - NODE_RADIUS}px`;
         nodeEl.style.top = `${node.y - NODE_RADIUS}px`;
 
+        // Remove any previous highlight/color classes before applying new ones
         nodeEl.classList.remove('highlight', 'red', 'black', 'temp-highlight');
 
         if (highlightNode && node.value === highlightNode.value) {
@@ -1216,6 +1230,14 @@ function drawTree(root, highlightNode = null) {
             nodeEl.classList.add(node.color);
         }
         
+        // Add hover effects for node info
+        nodeEl.addEventListener('mouseover', (e) => {
+            showNodeTooltip(node, e.clientX, e.clientY);
+        });
+        nodeEl.addEventListener('mouseout', () => {
+            hideNodeTooltip();
+        });
+
         treeContainer.appendChild(nodeEl);
 
         if (node.left && (currentTreeInstance instanceof RedBlackTree ? node.left !== currentTreeInstance.NIL : true)) {
@@ -1254,7 +1276,8 @@ function drawLine(x1, y1, x2, y2) {
 // --- Explanation Logging Function ---
 function logExplanation(message) {
     const p = document.createElement('p');
-    p.textContent = message;
+    // Use innerHTML to render HTML content, not just textContent
+    p.innerHTML = message;
     explanationBox.appendChild(p);
     explanationBox.scrollTop = explanationBox.scrollHeight;
 }
@@ -1268,11 +1291,12 @@ function showMessage(message, type = 'info') {
         document.body.appendChild(messageBox);
     }
 
-    messageBox.className = '';
+    messageBox.className = ''; // Clear previous classes
     messageBox.classList.add(type);
     messageBox.textContent = message;
 
-    messageBox.style.opacity = 1;
+    // Trigger the 'show' class for animation
+    messageBox.classList.add('show');
 
     if (type === 'info' && message.includes('found!')) {
         setTimeout(() => {
@@ -1280,10 +1304,86 @@ function showMessage(message, type = 'info') {
         }, 3500);
     }
 
+    // Hide after 3 seconds
     setTimeout(() => {
-        messageBox.style.opacity = 0;
+        messageBox.classList.remove('show'); // Trigger fade out
     }, 3000);
 }
+
+// --- Node Tooltip Functions ---
+function showNodeTooltip(node, mouseX, mouseY) {
+    if (!nodeTooltip) return;
+
+    let content = `Value: ${node.value}`;
+    if (currentTreeInstance instanceof AVLTree) {
+        content += `<br>Height: ${node.height}`;
+        content += `<br>Balance: ${currentTreeInstance.getBalanceFactor(node)}`;
+    } else if (currentTreeInstance instanceof RedBlackTree) {
+        content += `<br>Color: ${node.color.toUpperCase()}`;
+    }
+    content += `<br>Parent: ${node.parent ? node.parent.value : 'N/A'}`;
+    content += `<br>Left: ${node.left && node.left.value !== null ? node.left.value : 'N/A'}`;
+    content += `<br>Right: ${node.right && node.right.value !== null ? node.right.value : 'N/A'}`;
+
+    nodeTooltip.innerHTML = content;
+    nodeTooltip.style.left = `${mouseX + 15}px`; // Offset from mouse
+    nodeTooltip.style.top = `${mouseY + 15}px`;  // Offset from mouse
+    nodeTooltip.style.opacity = 1;
+}
+
+function hideNodeTooltip() {
+    if (nodeTooltip) {
+        nodeTooltip.style.opacity = 0;
+    }
+}
+
+
+// --- Random Tree Generation Function ---
+function generateRandomTree(numNodes = 10, maxValue = 100) {
+    currentTreeInstance.clear();
+    logExplanation(`--- Generating a random tree with ${numNodes} nodes ---`);
+    const values = new Set();
+    while (values.size < numNodes) {
+        values.add(Math.floor(Math.random() * maxValue) + 1); // Values from 1 to maxValue
+    }
+    
+    Array.from(values).sort((a,b) => 0.5 - Math.random()).forEach(value => { // Randomize insertion order
+        currentTreeInstance.insert(value);
+    });
+    showMessage(`Generated a random tree with ${currentTreeInstance.nodeCount} nodes.`, 'info');
+}
+
+// --- Tree Rules Explanations ---
+const treeRules = {
+    bst: `
+        <h3>Binary Search Tree (BST) Rules:</h3>
+        <p>&bull; Each node has at most two children.</p>
+        <p>&bull; The value of each node in the left subtree is less than the node's value.</p>
+        <p>&bull; The value of each node in the right subtree is greater than the node's value.</p>
+        <p>&bull; No duplicate values are allowed.</p>
+    `,
+    avl: `
+        <h3>AVL Tree Rules:</h3>
+        <p>&bull; It is a Binary Search Tree.</p>
+        <p>&bull; For every node, the height difference between its left and right subtrees (balance factor) must be -1, 0, or 1.</p>
+        <p>&bull; If the balance factor is violated, rotations (LL, RR, LR, RL) are performed to rebalance the tree.</p>
+    `,
+    redblack: `
+        <h3>Red-Black Tree Rules:</h3>
+        <p>&bull; Every node is either RED or BLACK.</p>
+        <p>&bull; The root is BLACK.</p>
+        <p>&bull; All leaves (NIL nodes) are BLACK.</p>
+        <p>&bull; If a node is RED, then both its children are BLACK (no two consecutive RED nodes).</p>
+        <p>&bull; Every simple path from a node to a descendant leaf contains the same number of BLACK nodes.</p>
+    `,
+    splay: `
+        <h3>Splay Tree Rules:</h3>
+        <p>&bull; It is a Binary Search Tree.</p>
+        <p>&bull; After every access (insert, delete, search), the accessed node is moved to the root of the tree using a sequence of rotations (splaying operations).</p>
+        <p>&bull; Splaying operations include Zig, Zag, Zig-Zig, Zig-Zag, Zag-Zig, and Zag-Zag.</p>
+        <p>&bull; This self-adjusting property makes frequently accessed nodes quicker to find in subsequent operations.</p>
+    `
+};
 
 
 // 7. Event Listeners
@@ -1292,6 +1392,11 @@ function showMessage(message, type = 'info') {
 treeTypeSelect.addEventListener('change', (event) => {
     try {
         const selectedType = event.target.value;
+        // Clear log and then add specific rules
+        explanationBox.innerHTML = '<h3>Explanation Log:</h3>'; // Clear log
+        logExplanation(`--- Switched to ${selectedType.toUpperCase()} Tree ---`);
+        logExplanation(treeRules[selectedType]); // Display rules for the selected tree
+
         if (selectedType === 'bst') {
             currentTreeInstance = bstInstance;
             pageTitle.textContent = "Binary Search Tree Visualizer";
@@ -1307,7 +1412,6 @@ treeTypeSelect.addEventListener('change', (event) => {
         }
         currentTreeInstance.clear();
         drawTree(currentTreeInstance.root);
-        logExplanation(`--- Switched to ${selectedType.toUpperCase()} Tree ---`);
         showMessage(`Switched to ${selectedType.toUpperCase()} Tree.`, 'info');
     } catch (error) {
         console.error("Error changing tree type:", error);
@@ -1341,61 +1445,87 @@ deleteBtn.addEventListener('click', () => {
             showMessage('Please enter a valid number.', 'error');
         }
     } catch (error) {
-        console.error("Error during delete:", error);
-        showMessage("An error occurred during deletion. Check console.", "error");
-    }
-});
+                console.error("Error during delete:", error);
+                showMessage("An error occurred during deletion. Check console.", "error");
+            }
+        });
 
-searchBtn.addEventListener('click', () => {
-    try {
-        const value = parseInt(nodeValueInput.value);
-        if (!isNaN(value)) {
-            currentTreeInstance.find(value).then(foundNode => {
-                if (!(currentTreeInstance instanceof SplayTree)) { // Splay tree's find handles its own drawing/highlighting
-                    if (foundNode) {
-                        drawTree(currentTreeInstance.root, foundNode);
-                    } else {
-                        drawTree(currentTreeInstance.root);
-                    }
+        searchBtn.addEventListener('click', () => {
+            try {
+                const value = parseInt(nodeValueInput.value);
+                if (!isNaN(value)) {
+                    currentTreeInstance.find(value).then(foundNode => {
+                        if (!(currentTreeInstance instanceof SplayTree)) { // Splay tree's find handles its own drawing/highlighting
+                            if (foundNode) {
+                                drawTree(currentTreeInstance.root, foundNode);
+                            } else {
+                                drawTree(currentTreeInstance.root);
+                            }
+                        }
+                    });
+                    nodeValueInput.value = '';
+                } else {
+                    showMessage('Please enter a valid number.', 'error');
+                }
+            } catch (error) {
+                console.error("Error during search:", error);
+                showMessage("An error occurred during search. Check console.", "error");
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            try {
+                currentTreeInstance.clear();
+                drawTree(null);
+                logExplanation(`--- Current Tree Cleared ---`);
+                showMessage('Tree cleared.', 'info');
+            } catch (error) {
+                console.error("Error during clear tree:", error);
+                showMessage("An error occurred clearing the tree. Check console.", "error");
+            }
+        });
+
+        clearLogBtn.addEventListener('click', () => {
+            try {
+                explanationBox.innerHTML = '<h3>Explanation Log:</h3>';
+                logExplanation('Explanation log cleared.');
+            } catch (error) {
+                console.error("Error clearing log:", error);
+                showMessage("An error occurred clearing the log. Check console.", "error");
+            }
+        });
+
+        // Event listener for animation speed slider
+        if (animationSpeedSlider) {
+            animationSpeedSlider.addEventListener('input', (event) => {
+                currentAnimationDelay = parseInt(event.target.value);
+                logExplanation(`Animation speed set to: ${currentAnimationDelay}ms delay.`);
+            });
+        }
+
+        // Event listener for random tree generation button
+        if (generateRandomBtn) {
+            generateRandomBtn.addEventListener('click', () => {
+                try {
+                    // You can customize the number of nodes and max value here
+                    generateRandomTree(15, 100); 
+                } catch (error) {
+                    console.error("Error generating random tree:", error);
+                    showMessage("An error occurred generating random tree. Check console.", "error");
                 }
             });
-            nodeValueInput.value = '';
-        } else {
-            showMessage('Please enter a valid number.', 'error');
         }
-    } catch (error) {
-        console.error("Error during search:", error);
-        showMessage("An error occurred during search. Check console.", "error");
-    }
-});
 
-clearBtn.addEventListener('click', () => {
-    try {
-        currentTreeInstance.clear();
-        drawTree(null);
-        logExplanation(`--- Current Tree Cleared ---`);
-        showMessage('Tree cleared.', 'info');
-    } catch (error) {
-        console.error("Error during clear tree:", error);
-        showMessage("An error occurred clearing the tree. Check console.", "error");
-    }
-});
-
-clearLogBtn.addEventListener('click', () => {
-    try {
-        explanationBox.innerHTML = '<h3>Explanation Log:</h3>';
-        logExplanation('Explanation log cleared.');
-    } catch (error) {
-        console.error("Error clearing log:", error);
-        showMessage("An error occurred clearing the log. Check console.", "error");
-    }
-});
-
-// Initial setup
-treeTypeSelect.value = 'bst'; // Set default selection to BST
-pageTitle.textContent = "Binary Search Tree Visualizer"; // Update title
-drawTree(currentTreeInstance.root);
-logExplanation(`--- Visualizer Initialized. Defaulting to Binary Search Tree (BST) ---`);
-logExplanation(`Insert numbers to build your tree. Try inserting: 50, 30, 70, 20, 40, 60, 80`);
-logExplanation(`If you encounter issues, please open your browser's developer console (F12 or right-click -> Inspect -> Console tab) for error messages.`);
-
+        // Initial setup
+        treeTypeSelect.value = 'bst'; // Set default selection to BST
+        pageTitle.textContent = "Binary Search Tree Visualizer"; // Update title
+        
+        // Display initial BST rules on load
+        explanationBox.innerHTML = '<h3>Explanation Log:</h3>'; // Ensure it's clean
+        logExplanation(`--- Visualizer Initialized. Defaulting to Binary Search Tree (BST) ---`);
+        logExplanation(treeRules['bst']); // Display BST rules initially
+        logExplanation(`Insert numbers to build your tree. Try inserting: 50, 30, 70, 20, 40, 60, 80`);
+        logExplanation(`You can now adjust animation speed and generate random trees!`);
+        logExplanation(`Hover over nodes for detailed information.`);
+        
+        drawTree(currentTreeInstance.root); // Draw initial empty tree

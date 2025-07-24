@@ -23,18 +23,27 @@
         <button id="deleteBtn">Delete Node</button>
         <button id="searchBtn">Search Node</button>
         <button id="clearBtn">Clear Tree</button>
+        <button id="generateRandomBtn">Generate Random Tree</button>
+        
+        <label for="animationSpeed" class="slider-label">Animation Speed:</label>
+        <input type="range" id="animationSpeed" min="50" max="2000" value="500">
+        
         <button id="clearLogBtn">Clear Log</button>
     </div>
 
-    <div id="treeContainer">
+    <div id="mainContent">
+        <div id="treeContainer">
+            <!-- Tree nodes and lines will be drawn here by JavaScript -->
         </div>
 
-    <div id="explanationBox">
-        <h3>Explanation Log:</h3>
-        <p>Actions and their underlying mechanisms will appear here.</p>
+        <div id="explanationBox">
+            <h3>Explanation Log:</h3>
+            <p>Actions and their underlying mechanisms will appear here.</p>
+        </div>
     </div>
 
     <div id="messageBox"></div> 
+    <div id="nodeTooltip"></div>
 
     <script src="script.js"></script>
 </body>
