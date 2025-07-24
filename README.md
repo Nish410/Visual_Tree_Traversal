@@ -3,8 +3,6 @@
 A dynamic and interactive web application designed to **visualize the operations and properties** of various tree data structures. This tool provides a clear, step-by-step explanation of how **Binary Search Trees (BST), AVL Trees, Red-Black Trees, and Splay Trees function — making complex concepts easier to understand and visually engaging.
 
 # Features
-
-#  Multiple Tree Types
 - Binary Search Tree (BST): Basic tree operations with ordered nodes.
 - AVL Tree: Self-balancing BST using rotations to maintain height balance.
 - Red-Black Tree: Balances via node coloring and rotations.
