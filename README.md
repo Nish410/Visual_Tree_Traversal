@@ -40,14 +40,6 @@ A dynamic and interactive web application designed to **visualize the operations
 - DOM is updated in real-time for user interactions and visual feedback.
 - Explanations of each operation are logged in a readable panel beside the tree.
 
-#File Structure
-
-Visual_Tree_Traversal/
-├── index.html
-├── style.css 
-├── script.js 
-└── README.md 
-
 #Getting Started
 
 To run the project locally:
