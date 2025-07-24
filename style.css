@@ -1,26 +1,25 @@
-/* style.css content - Enhanced UI/UX */
 body {
     font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 25px;
-    /* More complex radial gradient for a dynamic, deep background with subtle texture */
+    
     background: radial-gradient(circle at 10% 20%, #1a202c 0%, #171c26 50%, #13171f 100%);
     color: #e2e8f0;
     min-height: 100vh;
     transition: background 0.7s ease-in-out;
-    overflow-x: hidden; /* Prevent horizontal scroll on body */
+    overflow-x: hidden;
 }
 
 h1 {
     color: #e2e8f0;
     margin-bottom: 35px;
-    font-size: 3.2em; /* Even larger title */
+    font-size: 3.2em; 
     font-weight: 800;
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.4); /* Stronger text shadow */
-    letter-spacing: 1.5px; /* More spaced letters */
-    animation: fadeInDown 1s ease-out; /* Simple fade-in animation for title */
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.4); 
+    letter-spacing: 1.5px; 
+    animation: fadeInDown 1s ease-out; 
 }
 
 @keyframes fadeInDown {
@@ -38,12 +37,12 @@ h1 {
     margin-bottom: 40px;
     display: flex;
     flex-wrap: wrap;
-    gap: 25px; /* Increased gap for more breathing room */
+    gap: 25px; 
     align-items: center;
-    padding: 30px; /* More padding */
+    padding: 30px; 
     background-color: #2d3748;
-    border-radius: 25px; /* More rounded corners */
-    /* Layered box-shadow for a floating, deep effect */
+    border-radius: 25px; 
+   
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), 0 0 0 5px rgba(45, 55, 72, 0.2);
     justify-content: center;
     max-width: 90%;
@@ -51,13 +50,13 @@ h1 {
 }
 
 input[type="number"] {
-    padding: 15px 22px; /* Larger padding */
+    padding: 15px 22px; 
     border: 1px solid #4a5568;
-    border-radius: 15px; /* More rounded */
-    font-size: 19px; /* Larger font */
-    width: 160px; /* Wider input */
+    border-radius: 15px; 
+    font-size: 19px; 
+    width: 160px;
     transition: all 0.3s ease;
-    box-shadow: inset 0 3px 7px rgba(0,0,0,0.3); /* Deeper inner shadow */
+    box-shadow: inset 0 3px 7px rgba(0,0,0,0.3); 
     background-color: #2d3748;
     color: #e2e8f0;
 }
@@ -65,7 +64,7 @@ input[type="number"] {
 input[type="number"]:focus {
     outline: none;
     border-color: #00bcd4;
-    /* More vibrant, wider glow on focus */
+    
     box-shadow: 0 0 0 6px rgba(0, 188, 212, 0.6), inset 0 3px 7px rgba(0,0,0,0.3);
 }
 
@@ -82,9 +81,9 @@ select {
     appearance: none;
     background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23e2e8f0%22%20d%3D%22M287%2C197.93l-131.7-131.7c-4.7-4.7-12.3-4.7-17%2C0L5.4%2C197.93c-4.7%2C4.7-4.7%2C12.3%2C0%2C17l11.3%2C11.3c4.7%2C4.7%2C12.3%2C4.7%2C17%2C0l103.1-103.1l103.1%2C103.1c4.7%2C4.7%2C12.3%2C4.7%2C17%2C0l11.3-11.3C291.7%2C210.23%2C291.7%2C202.63%2C287%2C197.93z%22%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
-    background-position: right 18px center; /* Adjusted position */
-    background-size: 14px; /* Slightly larger arrow */
-    padding-right: 45px; /* More space for the arrow */
+    background-position: right 18px center; 
+    background-size: 14px; 
+    padding-right: 45px; 
 }
 
 select:hover {
@@ -98,33 +97,33 @@ select:focus {
 }
 
 button {
-    padding: 15px 30px; /* Larger padding */
+    padding: 15px 30px; 
     color: #1a202c;
     border: none;
-    border-radius: 15px; /* More rounded */
+    border-radius: 15px; 
     cursor: pointer;
-    font-size: 19px; /* Larger font */
+    font-size: 19px; 
     font-weight: bold;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother, more engaging transition */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45); /* Deeper button shadow */
-    background-image: linear-gradient(135deg, #00bcd4 0%, #00a8c0 100%); /* Diagonal cyan gradient */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45); 
+    background-image: linear-gradient(135deg, #00bcd4 0%, #00a8c0 100%); 
 }
 
 button:hover {
-    transform: translateY(-7px); /* More pronounced lift on hover */
-    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 188, 212, 0.5); /* Stronger shadow with glow */
-    background-image: linear-gradient(135deg, #00a8c0 0%, #00bcd4 100%); /* Reverse gradient on hover */
+    transform: translateY(-7px); 
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 188, 212, 0.5); 
+    background-image: linear-gradient(135deg, #00a8c0 0%, #00bcd4 100%); /
 }
 
 button:active {
-    transform: translateY(-2px) scale(1.02); /* Subtle pop on active */
+    transform: translateY(-2px) scale(1.02); 
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 #deleteBtn {
-    background-image: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); /* Diagonal red gradient */
+    background-image: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); 
     color: white;
 }
 
@@ -134,7 +133,7 @@ button:active {
 }
 
 #searchBtn {
-    background-image: linear-gradient(135deg, #00bcd4 0%, #00a8c0 100%); /* Cyan gradient */
+    background-image: linear-gradient(135deg, #00bcd4 0%, #00a8c0 100%); 
     color: #1a202c;
 }
 
@@ -143,17 +142,17 @@ button:active {
     background-image: linear-gradient(135deg, #00a8c0 0%, #00bcd4 100%);
 }
 
-#clearBtn, #clearLogBtn, #generateRandomBtn { /* Added generateRandomBtn */
-    background-image: linear-gradient(135deg, #4a5568 0%, #2d3748 100%); /* Diagonal grey gradient */
+#clearBtn, #clearLogBtn, #generateRandomBtn { 
+    background-image: linear-gradient(135deg, #4a5568 0%, #2d3748 100%); 
     color: #e2e8f0;
 }
 
-#clearBtn:hover, #clearLogBtn:hover, #generateRandomBtn:hover { /* Added generateRandomBtn */
+#clearBtn:hover, #clearLogBtn:hover, #generateRandomBtn:hover { 
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(74, 85, 104, 0.5);
     background-image: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
 }
 
-/* Animation Speed Slider */
+
 .slider-label {
     color: #e2e8f0;
     font-size: 1.1em;
@@ -162,11 +161,11 @@ button:active {
 }
 
 #animationSpeed {
-    -webkit-appearance: none; /* Override default look */
+    -webkit-appearance: none; 
     appearance: none;
-    width: 180px; /* Full-width slider */
+    width: 180px; 
     height: 10px;
-    background: #4a5568; /* Track background */
+    background: #4a5568; 
     outline: none;
     opacity: 0.8;
     transition: opacity .2s ease-in-out;
@@ -178,14 +177,14 @@ button:active {
     opacity: 1;
 }
 
-/* Thumb style */
+
 #animationSpeed::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #00bcd4; /* Cyan thumb */
+    background: #00bcd4; /
     cursor: pointer;
     box-shadow: 0 0 8px rgba(0, 188, 212, 0.7);
     transition: background 0.3s ease, box-shadow 0.3s ease;
@@ -208,20 +207,20 @@ button:active {
 }
 
 
-/* Main content area for tree and explanation */
+
 #mainContent {
     display: flex;
-    flex-direction: row; /* Default to row for larger screens */
-    gap: 30px; /* Space between tree and log */
+    flex-direction: row; 
+    gap: 30px; 
     width: 95%;
-    max-width: 1800px; /* Increased max-width to give more horizontal room */
+    max-width: 1800px; 
     margin-bottom: 35px;
-    align-items: flex-start; /* Align items to the top */
+    align-items: flex-start; 
 }
 
 #treeContainer {
-    flex: 3; /* Tree takes more space */
-    min-width: 60%; /* Ensure it doesn't shrink too much */
+    flex: 3; 
+    min-width: 60%; 
     border: 1px solid #4a5568;
     min-height: 600px;
     background-color: #2d3748;
@@ -233,20 +232,20 @@ button:active {
     transition: all 0.6s ease-in-out;
 }
 
-/* Styles for individual tree nodes */
+
 .node {
     position: absolute;
     width: 65px;
     height: 65px;
-    background-color: #2ecc71; /* Green color for nodes */
+    background-color: #2ecc71; 
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1a202c; /* Dark text for green nodes */
+    color: #1a202c; 
     font-weight: bold;
     font-size: 20px;
-    border: 5px solid #27ae60; /* Darker green border */
+    border: 5px solid #27ae60; 
     box-shadow: 5px 6px 25px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,255,255,0.1);
     transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55), background-color 0.4s ease, border-color 0.4s ease, opacity 0.6s ease, transform 0.6s ease;
     z-index: 10;
@@ -265,7 +264,6 @@ button:active {
     box-shadow: 6px 7px 30px rgba(0,0,0,0.6), inset 0 0 15px rgba(255,255,255,0.2);
 }
 
-/* Highlight style for searched node */
 .node.highlight {
     background-color: #00bcd4;
     border-color: #00a8c0;
@@ -284,11 +282,10 @@ button:active {
 }
 
 
-/* Red-Black Tree specific node colors */
 .node.red {
     background-color: #ef4444;
     border-color: #dc2626;
-    color: white; /* Ensure text is white for red nodes */
+    color: white; 
 }
 
 .node.black {
@@ -297,7 +294,7 @@ button:active {
     border-color: #2d3748;
 }
 
-/* Temporary highlight for RB/Splay operations */
+
 .node.temp-highlight {
     border: 7px solid #fbbf24;
     box-shadow: 0 0 30px rgba(251, 191, 36, 1.2), 0 0 10px rgba(251, 191, 36, 0.8) inset;
@@ -305,7 +302,6 @@ button:active {
 }
 
 
-/* Styles for lines connecting nodes */
 .line {
     position: absolute;
     background-color: #636b7a;
@@ -349,88 +345,86 @@ button:active {
     color: #1a202c;
 }
 
-/* Explanation Log Styling */
+
 #explanationBox {
-    flex: 1; /* Explanation box takes less space */
-    min-width: 30%; /* Ensure it doesn't shrink too much */
+    flex: 1; 
+    min-width: 30%; 
     background-color: #2d3748;
     border: 1px solid #4a5568;
     border-radius: 20px;
-    padding: 35px; /* Slightly less padding to fit better */
-    min-height: 600px; /* Match tree container height */
-    max-height: 600px; /* Max height to enable scrolling within the box */
+    padding: 35px; 
+    min-height: 600px; 
+    max-height: 600px; 
     overflow-y: auto;
     font-family: 'Segoe UI Mono', 'Consolas', monospace;
     font-size: 17px;
     color: #e2e8f0;
     box-shadow: 0 10px 28px rgba(0,0,0,0.25);
-    line-height: 1.4; /* Further reduced line height */
+    line-height: 1.4; 
     white-space: pre-wrap;
-    margin-top: 0; /* Remove top margin as it's part of flex container now */
+    margin-top: 0; 
 }
 
 #explanationBox h3 {
     color: #e2e8f0;
-    margin-bottom: 15px; /* Slightly reduced margin below heading */
+    margin-bottom: 15px; 
     font-size: 1.6em;
     border-bottom: 3px solid #4a5568;
-    padding-bottom: 10px; /* Reduced padding below border */
+    padding-bottom: 10px; 
 }
 
 #explanationBox p {
-    margin: 2px 0; /* Further reduced margin for paragraphs */
+    margin: 2px 0; 
     padding: 0;
 }
 
-/* Node Tooltip Styling */
+
 #nodeTooltip {
     position: absolute;
-    background-color: rgba(45, 55, 72, 0.95); /* Dark, semi-transparent background */
+    background-color: rgba(45, 55, 72, 0.95); 
     color: #e2e8f0;
     border: 1px solid #636b7a;
     border-radius: 8px;
     padding: 10px 15px;
     font-size: 0.9em;
-    pointer-events: none; /* Allow mouse events to pass through */
+    pointer-events: none; 
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
-    z-index: 1001; /* Above message box */
+    z-index: 1001; 
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     line-height: 1.4;
 }
 
-/* Custom Scrollbar for Webkit browsers (Chrome, Safari) */
 ::-webkit-scrollbar {
-    width: 12px; /* Width of the scrollbar */
+    width: 12px; 
 }
 
 ::-webkit-scrollbar-track {
-    background: #2d3748; /* Color of the track */
+    background: #2d3748; 
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #4a5568; /* Color of the scroll thumb */
+    background: #4a5568; 
     border-radius: 10px;
-    border: 3px solid #2d3748; /* Padding around thumb */
+    border: 3px solid #2d3748; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #636b7a; /* Color of the scroll thumb on hover */
-}
+    background: #636b7a; 
 
 
-/* Responsive adjustments */
-@media (max-width: 1200px) { /* Adjust breakpoint for side-by-side to stack */
+
+@media (max-width: 1200px) { 
     #mainContent {
-        flex-direction: column; /* Stack vertically on smaller screens */
+        flex-direction: column; 
         align-items: center;
         gap: 25px;
     }
     #treeContainer, #explanationBox {
-        width: 95%; /* Take full width */
-        max-width: none; /* Remove max-width constraint */
-        min-height: 450px; /* Adjust heights for stacked layout */
+        width: 95%; 
+        max-width: none; 
+        min-height: 450px; 
         max-height: 450px;
     }
     h1 {
